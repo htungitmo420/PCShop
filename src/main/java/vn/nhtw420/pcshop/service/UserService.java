@@ -1,0 +1,10 @@
+package vn.nhtw420.pcshop.service;
+
+import org.springframework.stereotype.Service;
+
+@Service
+public class UserService {
+    public String handleHello() {
+        return "User say hello world!";
+    }
+}

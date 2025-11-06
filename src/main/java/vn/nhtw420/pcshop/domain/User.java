@@ -1,7 +1,14 @@
 package vn.nhtw420.pcshop.domain;
 
+import jakarta.persistence.*;
+
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Id;
+
     private String Email;
     private String Password;
     private String FullName;

@@ -1,10 +1,25 @@
 package vn.nhtw420.pcshop.service;
 
 import org.springframework.stereotype.Service;
+import vn.nhtw420.pcshop.domain.User;
+import vn.nhtw420.pcshop.repository.UserRepository;
+
+import java.util.List;
 
 @Service
 public class UserService {
-    public String handleHello() {
-        return "Hello from service";
+
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public List<User> getAllUsers() {
+        return this.userRepository.findAll();
+    }
+
+    public void handleSaveUser(User user) {
+        this.userRepository.save(user);
     }
 }

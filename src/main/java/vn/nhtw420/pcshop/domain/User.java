@@ -2,7 +2,10 @@ package vn.nhtw420.pcshop.domain;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -14,6 +17,16 @@ public class User {
     private String fullName;
     private String address;
     private String phoneNumber;
+
+    private String avatar;
+
+    //User many -> to one Role
+    @ManyToOne
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user")
+    private List<Order> orders;
 
     public long getId() {
         return id;
@@ -63,15 +76,24 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + id +
-                ", Email='" + email + '\'' +
-                ", Password='" + password + '\'' +
-                ", FullName='" + fullName + '\'' +
-                ", Address='" + address + '\'' +
-                ", PhoneNumber='" + phoneNumber + '\'' +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", avatar='" + avatar + '\'' +
                 '}';
     }
 }

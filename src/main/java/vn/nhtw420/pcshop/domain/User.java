@@ -7,71 +7,71 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long Id;
+    private long id;
 
-    private String Email;
-    private String Password;
-    private String FullName;
-    private String Address;
-    private String PhoneNumber;
+    private String email;
+    private String password;
+    private String fullName;
+    private String address;
+    private String phoneNumber;
 
     public long getId() {
-        return Id;
+        return id;
     }
 
     public void setId(long id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
 
     public String getFullName() {
-        return FullName;
+        return fullName;
     }
 
     public void setFullName(String fullName) {
-        FullName = fullName;
+        this.fullName = fullName;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String address) {
-        Address = address;
+        this.address = address;
     }
 
     public String getPhoneNumber() {
-        return PhoneNumber;
+        return phoneNumber;
     }
 
     public void setPhoneNumber(String phoneNumber) {
-        PhoneNumber = phoneNumber;
+        this.phoneNumber = phoneNumber;
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "Id=" + Id +
-                ", Email='" + Email + '\'' +
-                ", Password='" + Password + '\'' +
-                ", FullName='" + FullName + '\'' +
-                ", Address='" + Address + '\'' +
-                ", PhoneNumber='" + PhoneNumber + '\'' +
+                "Id=" + id +
+                ", Email='" + email + '\'' +
+                ", Password='" + password + '\'' +
+                ", FullName='" + fullName + '\'' +
+                ", Address='" + address + '\'' +
+                ", PhoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }

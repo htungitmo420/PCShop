@@ -22,4 +22,9 @@ public class UserService {
     public void handleSaveUser(User user) {
         this.userRepository.save(user);
     }
+
+    public User getUserId(long id) {
+        return this.userRepository.findById(id);
+    }
+
 }

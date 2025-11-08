@@ -1,4 +1,4 @@
-package vn.nhtw420.pcshop.controller;
+package vn.nhtw420.pcshop.controller.Admin;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +10,6 @@ import vn.nhtw420.pcshop.domain.User;
 import vn.nhtw420.pcshop.service.UserService;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class UserController {
@@ -31,7 +30,7 @@ public class UserController {
     public String getListUsers(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users", users);
-        return "admin/user/table-user";
+        return "admin/user/show";
     }
 
     // Hiển thị form tạo user
@@ -53,14 +52,14 @@ public class UserController {
         User user = this.userService.getUserId(id);
         model.addAttribute("user", user);
         model.addAttribute("id", id);
-        return "admin/user/showUser";
+        return "admin/user/detail";
     }
 
     @GetMapping("/admin/user/update/{id}")
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserId(id);
         model.addAttribute("newUser", currentUser);
-        return "admin/user/updateUser";
+        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
@@ -83,7 +82,7 @@ public class UserController {
             return "redirect:/admin/user";
         }
         model.addAttribute("newUser", user);
-        return "admin/user/deleteUser";
+        return "admin/user/delete";
     }
 
     @PostMapping("/admin/user/delete")

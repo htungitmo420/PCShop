@@ -51,6 +51,7 @@
             </div>
         </div>
 
+        <!-- Footer -->
         <div class="site-footer">
             <jsp:include page="../layout/footer.jsp"/>
         </div>

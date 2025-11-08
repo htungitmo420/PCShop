@@ -27,32 +27,33 @@
                 </ol>
             </nav>
 
-            <div class="my-5">
+            <div class="container mt-5">
                 <div class="row">
                     <div class="col-12 mx-auto">
                         <div class="d-flex justify-content-between">
-                            <h3>Table Users ID: ${id}</h3>
+                            <h3>Delete User with ID ${id}</h3>
                         </div>
-                        <div>
-                            <hr/>
-                            <div class="card" style="width: 60%;">
-                                <div class="card-header">User Information</div>
-                                <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">ID: ${user.id}</li>
-                                    <li class="list-group-item">Email: ${user.email}</li>
-                                    <li class="list-group-item">Full Name: ${user.fullName}</li>
-                                    <li class="list-group-item">Address: ${user.address}</li>
-                                </ul>
+
+                        <hr/>
+                        <div class="alert alert-danger">
+                            You are going to delete this user. Are you sure?
+                        </div>
+                        <%--@elvariable id="newUser" type="vn"--%>
+                        <form:form method="post" modelAttribute="newUser" action="/admin/user/delete">
+                            <div class="mb-3" style="display: none">
+                                <label class="form-label">ID:</label>
+                                <form:hidden path="id"/>
                             </div>
-                            <a href="/admin/user" class="btn btn-success mt-3">Back</a>
-                        </div>
+                            <button type="submit" class="btn btn-danger">Confirm!</button>
+                            <a class="btn btn-success" href="<c:url value='/admin/user'/>">Cancel</a>
+                        </form:form>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="site-footer">
-            <jsp:include page="../layout/footer.jsp"/>
+            <div class="site-footer">
+                <jsp:include page="../layout/footer.jsp"/>
+            </div>
         </div>
     </main>
 </div>

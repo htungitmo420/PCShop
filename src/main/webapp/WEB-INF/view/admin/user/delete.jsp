@@ -50,10 +50,10 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="site-footer">
-                <jsp:include page="../layout/footer.jsp"/>
-            </div>
+        <div class="site-footer">
+            <jsp:include page="../layout/footer.jsp"/>
         </div>
     </main>
 </div>

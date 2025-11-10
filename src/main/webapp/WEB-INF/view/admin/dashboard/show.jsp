@@ -14,7 +14,7 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
     <!-- Custom CSS -->
-    <link href="<c:url value='/resources/css/style.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/css/admin/style.css'/>" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">

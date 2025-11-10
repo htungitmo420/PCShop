@@ -1,4 +1,3 @@
-<!-- File: src/main/webapp/WEB-INF/view/admin/order/detail.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
@@ -14,7 +13,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Custom CSS -->
-    <link href="<c:url value='/resources/css/style.css'/>" rel="stylesheet">
+    <link href="<c:url value='/resources/css/admin/style.css'/>" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">

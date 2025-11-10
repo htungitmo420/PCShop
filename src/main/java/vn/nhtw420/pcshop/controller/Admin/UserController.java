@@ -1,12 +1,12 @@
 package vn.nhtw420.pcshop.controller.Admin;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import vn.nhtw420.pcshop.domain.User;
+import vn.nhtw420.pcshop.service.UploadService;
 import vn.nhtw420.pcshop.service.UserService;
 
 import java.util.List;
@@ -15,9 +15,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final UploadService uploadService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UploadService uploadService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.uploadService = uploadService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -25,7 +29,6 @@ public class UserController {
         return "hello";
     }
 
-    // Hiển thị danh sách user
     @GetMapping("/admin/user")
     public String getListUsers(Model model) {
         List<User> users = this.userService.getAllUsers();
@@ -33,19 +36,30 @@ public class UserController {
         return "admin/user/show";
     }
 
-    // Hiển thị form tạo user
     @GetMapping("/admin/user/create")
     public String getCreateUserPage(Model model) {
         model.addAttribute("newUser", new User());
+        model.addAttribute("roles", this.userService.getAllRoles());
         return "admin/user/create";
     }
 
-    // Xử lý submit form tạo user
     @PostMapping("/admin/user/create")
-    public String createUserPage(@ModelAttribute("newUser") User user) {
-        this.userService.handleSaveUser(user);
+    public String createUserPage(@ModelAttribute("newUser") User user,
+                                 @RequestParam("imageFile") MultipartFile file) {
+        String fileName = uploadService.handleSaveUploadFile(file);
+        if (fileName != null) {
+            user.setAvatar(fileName);
+        }
+
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashPassword);
+
+        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+
+        userService.handleSaveUser(user);
         return "redirect:/admin/user";
     }
+
 
     @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
@@ -59,21 +73,29 @@ public class UserController {
     public String getUpdateUserPage(Model model, @PathVariable long id) {
         User currentUser = this.userService.getUserId(id);
         model.addAttribute("newUser", currentUser);
+        model.addAttribute("roles", this.userService.getAllRoles());
         return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
-    public String postUpdateUser(Model model, @ModelAttribute("newUser") User user) {
-        User currentUser = this.userService.getUserId(user.getId());
-        if (currentUser != null) {
-            currentUser.setAddress(user.getAddress());
-            currentUser.setFullName(user.getFullName());
-            currentUser.setPhoneNumber(user.getPhoneNumber());
+    public String postUpdateUser(
+            Model model,
+            @ModelAttribute("newUser") User user,
+            @RequestParam("imageFile") MultipartFile file) {
 
-            this.userService.handleSaveUser(currentUser);
+        User currentUser = userService.getUserId(user.getId());
+        if (currentUser == null) {
+            return "redirect:/admin/user";
         }
+
+        uploadService.updateUserAvatar(currentUser, file);
+        userService.updateUserRole(currentUser, user);
+        userService.updateUserBasicInfo(currentUser, user);
+
+        userService.handleSaveUser(currentUser);
         return "redirect:/admin/user";
     }
+
 
     @GetMapping("/admin/user/delete/{id}")
     public String getDeleteUser(Model model, @PathVariable long id) {

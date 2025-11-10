@@ -1,7 +1,9 @@
 package vn.nhtw420.pcshop.service;
 
 import org.springframework.stereotype.Service;
+import vn.nhtw420.pcshop.domain.Role;
 import vn.nhtw420.pcshop.domain.User;
+import vn.nhtw420.pcshop.repository.RoleRepository;
 import vn.nhtw420.pcshop.repository.UserRepository;
 
 import java.util.List;
@@ -10,9 +12,11 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     public List<User> getAllUsers() {
@@ -31,4 +35,30 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
+    public Role getRoleByName(String name) {
+        return this.roleRepository.findByName(name);
+    }
+
+    public List<Role> getAllRoles() {
+        return this.roleRepository.findAll();
+    }
+
+    public Role getRoleById(long id) {
+        return this.roleRepository.findById(id).orElse(null);
+    }
+
+    public void updateUserRole(User currentUser, User userWithNewData) {
+        if (userWithNewData.getRole() == null || userWithNewData.getRole().getId() <= 0) return;
+
+        Role role = getRoleById(userWithNewData.getRole().getId());
+        if (role != null) {
+            currentUser.setRole(role);
+        }
+    }
+
+    public void updateUserBasicInfo(User currentUser, User userWithNewData) {
+        currentUser.setAddress(userWithNewData.getAddress());
+        currentUser.setFullName(userWithNewData.getFullName());
+        currentUser.setPhoneNumber(userWithNewData.getPhoneNumber());
+    }
 }

@@ -11,28 +11,36 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    private long name;
+    private String name;
 
-    private long description;
+    private String description;
 
     // Role one -> Many User
     @OneToMany(mappedBy = "role")
     private List<User> users;
 
-    public long getName() {
-        return name;
-    }
-
-    public void setName(long name) {
-        this.name = name;
-    }
-
-    public long getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(long description) {
+    public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public long getId() {

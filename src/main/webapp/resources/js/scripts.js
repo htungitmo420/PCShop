@@ -1,109 +1,51 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('main-content');
-    const sidebarOverlay = document.getElementById('sidebar-overlay');
+document.addEventListener("DOMContentLoaded", function () {
+    const body = document.body;
+    const btn = document.getElementById("btnSidebar");
+    const overlay = document.querySelector(".sidebar-overlay");
 
-    // select any possible toggle buttons used in templates
-    const toggles = Array.from(document.querySelectorAll('#sidebarToggle, #sidebarCollapse, #sidebarCollapseTop, .sidebar-toggle, [data-toggle="sidebar"]'));
+    if (!btn) return;
 
-    function isMobile() {
-        return window.innerWidth <= 768;
+    const MOBILE_WIDTH = 992;
+
+    function toggleSidebar() {
+        body.classList.toggle("sidebar-collapsed");
     }
 
-    function setAriaExpanded(button, expanded) {
-        if (!button) return;
-        try {
-            button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-        } catch (e) { /* ignore */
-        }
+    function closeSidebar() {
+        body.classList.add("sidebar-collapsed");
     }
 
-    function openMobileSidebar() {
-        if (!sidebar) return;
-        sidebar.classList.add('show');
-        if (sidebarOverlay) sidebarOverlay.classList.add('show');
-        // set aria on toggles
-        toggles.forEach(t => setAriaExpanded(t, true));
-        document.body.style.overflow = 'hidden';
+    function openSidebar() {
+        body.classList.remove("sidebar-collapsed");
     }
 
-    function closeMobileSidebar() {
-        if (!sidebar) return;
-        sidebar.classList.remove('show');
-        if (sidebarOverlay) sidebarOverlay.classList.remove('show');
-        toggles.forEach(t => setAriaExpanded(t, false));
-        document.body.style.overflow = '';
+    // Click button to toggle
+    btn.addEventListener("click", toggleSidebar);
+
+    // Click overlay to close
+    if (overlay) {
+        overlay.addEventListener("click", closeSidebar);
     }
 
-    function toggleDesktopCollapse() {
-        if (!sidebar) return;
-        sidebar.classList.toggle('collapsed');
-        if (mainContent) mainContent.classList.toggle('expanded');
-        const collapsed = sidebar.classList.contains('collapsed');
-        toggles.forEach(t => setAriaExpanded(t, !collapsed));
-    }
+    // **ALWAYS START COLLAPSED** - removed auto-open logic
+    closeSidebar();
 
-    function toggleSidebar(e) {
-        // prevent unexpected form submits / links
-        if (e) e.preventDefault();
-
-        if (!sidebar) return;
-
-        if (isMobile()) {
-            if (sidebar.classList.contains('show')) closeMobileSidebar();
-            else openMobileSidebar();
-        } else {
-            toggleDesktopCollapse();
-        }
-    }
-
-    // attach listeners to all toggles
-    toggles.forEach(btn => {
-        if (!btn) return;
-        btn.addEventListener('click', toggleSidebar);
-    });
-
-    // overlay click closes mobile sidebar
-    if (sidebarOverlay) {
-        sidebarOverlay.addEventListener('click', function () {
-            closeMobileSidebar();
-        });
-    }
-
-    // Close sidebar with Escape key (mobile)
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape' || e.key === 'Esc') {
-            if (sidebar && sidebar.classList.contains('show')) closeMobileSidebar();
+    // Responsive resize - always close on mobile
+    window.addEventListener("resize", function () {
+        if (window.innerWidth <= MOBILE_WIDTH) {
+            closeSidebar();
         }
     });
 
-    // Add data-tooltip attributes for collapsed mode (used in CSS ::after)
-    if (sidebar) {
-        const menuLinks = sidebar.querySelectorAll('.components li a, .list-unstyled.components li a');
-        menuLinks.forEach(link => {
-            const textEl = link.querySelector('.menu-text') || link.querySelector('span');
-            const text = textEl ? textEl.textContent.trim() : link.textContent.trim();
-            if (text) link.setAttribute('data-tooltip', text);
-        });
-    }
+    // ESC key to close sidebar
+    document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") {
+            closeSidebar();
+        }
+    });
 
-    // Ensure layout adapts on resize: if switching between mobile and desktop, reset classes
-    let resizeTimeout;
-    window.addEventListener('resize', function () {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(function () {
-            if (!sidebar) return;
-            if (isMobile()) {
-                // if mobile, remove collapsed desktop state so sidebar can slide in
-                sidebar.classList.remove('collapsed');
-                if (mainContent) mainContent.classList.remove('expanded');
-                toggles.forEach(t => setAriaExpanded(t, false));
-            } else {
-                // remove mobile show/overlay if present
-                sidebar.classList.remove('show');
-                if (sidebarOverlay) sidebarOverlay.classList.remove('show');
-                document.body.style.overflow = '';
-            }
-        }, 150);
+    // Close sidebar when navigating to new page
+    window.addEventListener("beforeunload", function () {
+        closeSidebar();
     });
 });

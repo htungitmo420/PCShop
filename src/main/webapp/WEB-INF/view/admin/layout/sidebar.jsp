@@ -1,48 +1,20 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
+<c:set var="uri" value="${pageContext.request.requestURI}"/>
+<aside class="sidebar">
+    <div class="nav-title">Management</div>
 
-<nav id="sidebar" class="sidebar">
-    <div class="sidebar-content">
-        <ul class="list-unstyled components">
-            <li class="sidebar-heading">
-                <span class="heading-text">FEATURES</span>
-            </li>
+    <a class="nav-link ${fn:contains(uri, '/admin/user') ? 'active' : ''}" href="/admin/user">
+        <i class="fa-solid fa-users"></i> <span>Users</span>
+    </a>
+    <a class="nav-link ${fn:contains(uri, '/admin/product') ? 'active' : ''}" href="/admin/product">
+        <i class="fa-solid fa-box"></i> <span>Products</span>
+    </a>
+    <a class="nav-link ${fn:contains(uri, '/admin/order') ? 'active' : ''}" href="/admin/order">
+        <i class="fa-solid fa-receipt"></i> <span>Orders</span>
+    </a>
 
-            <li class="active">
-                <a href="/admin" data-tooltip="Dashboard">
-                    <i class="fas fa-tachometer-alt"></i>
-                    <span class="menu-text">Dashboard</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/user" data-tooltip="Users">
-                    <i class="fas fa-users"></i>
-                    <span class="menu-text">User</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/product" data-tooltip="Products">
-                    <i class="fas fa-laptop"></i>
-                    <span class="menu-text">Product</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="/admin/order" data-tooltip="Orders">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="menu-text">Order</span>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div class="sidebar-footer">
-        <div class="small text-center">Logged in as:</div>
-        <div class="fw-bold text-center">Hỏi Dân IT</div>
-    </div>
-</nav>
-
-<!-- Overlay for mobile -->
-<div id="sidebar-overlay" class="sidebar-overlay"></div>
+    <div class="nav-title" style="margin-top:1rem;">Shortcuts</div>
+    <a class="nav-link" href="/admin/settings"><i class="fa-solid fa-gear"></i> Settings</a>
+    <a class="nav-link" href="/"><i class="fa-solid fa-arrow-left"></i> Back to site</a>
+</aside>

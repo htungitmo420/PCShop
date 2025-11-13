@@ -56,9 +56,10 @@ public class UserService {
         }
     }
 
-    public void updateUserBasicInfo(User currentUser, User userWithNewData) {
+    public void updateUserInfo(User currentUser, User userWithNewData) {
         currentUser.setAddress(userWithNewData.getAddress());
         currentUser.setFullName(userWithNewData.getFullName());
         currentUser.setPhoneNumber(userWithNewData.getPhoneNumber());
+        currentUser.setAvatar((userWithNewData.getAvatar()));
     }
 }

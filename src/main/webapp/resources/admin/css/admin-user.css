@@ -120,7 +120,7 @@ body {
 }
 
 .table thead th {
-    color: white;
+    color: black;
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.875rem;

@@ -8,44 +8,32 @@ document.addEventListener("DOMContentLoaded", function () {
     const MOBILE_WIDTH = 992;
 
     function toggleSidebar() {
+        body.classList.toggle("sidebar-open");
         body.classList.toggle("sidebar-collapsed");
     }
 
     function closeSidebar() {
         body.classList.add("sidebar-collapsed");
+        body.classList.remove("sidebar-open");
     }
 
     function openSidebar() {
+        body.classList.add("sidebar-open");
         body.classList.remove("sidebar-collapsed");
     }
 
-    // Click button to toggle
     btn.addEventListener("click", toggleSidebar);
 
-    // Click overlay to close
     if (overlay) {
         overlay.addEventListener("click", closeSidebar);
     }
 
-    // **ALWAYS START COLLAPSED** - removed auto-open logic
+    // start collapsed
     closeSidebar();
 
-    // Responsive resize - always close on mobile
     window.addEventListener("resize", function () {
         if (window.innerWidth <= MOBILE_WIDTH) {
             closeSidebar();
         }
-    });
-
-    // ESC key to close sidebar
-    document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") {
-            closeSidebar();
-        }
-    });
-
-    // Close sidebar when navigating to new page
-    window.addEventListener("beforeunload", function () {
-        closeSidebar();
     });
 });

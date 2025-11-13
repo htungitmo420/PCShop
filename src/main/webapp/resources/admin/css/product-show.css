@@ -1,0 +1,174 @@
+/* ===== CONSISTENT LAYOUT ===== */
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.with-sidebar {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#main-content {
+    flex: 1;
+    padding: 2rem;
+}
+
+/* ===== HEADER CARD ===== */
+
+.header-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.header-card h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    color: #2d3748;
+}
+
+/* ===== STATS CARD ===== */
+
+.stats-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stats-card .icon-box {
+    background: #764ba2;
+    width: 70px;
+    height: 70px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2rem;
+}
+
+/* ===== PRODUCT CARD ===== */
+
+.product-card {
+    background: white;
+    border-radius: 20px;
+    padding: 0;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.product-card-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.product-card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    color: #2d3748;
+}
+
+/* CREATE BUTTON */
+
+.btn-create-modern {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white !important;
+    padding: .75rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+
+/* ===== EMPTY STATE ===== */
+
+.empty-state-modern {
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.empty-state-modern i {
+    color: #cbd5e0;
+    margin-bottom: 1rem;
+}
+
+.empty-state-modern h3 {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+/* ===== TABLE ===== */
+
+.product-table thead {
+    background: #f7fafc;
+}
+
+.product-table thead th {
+    border: none;
+    padding: 1rem 2rem;
+    text-transform: uppercase;
+    font-size: .8rem;
+}
+
+.product-table tbody td {
+    padding: 1.25rem 2rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* ===== ACTION BUTTONS ===== */
+
+.action-buttons-modern {
+    display: flex;
+    gap: .5rem;
+}
+
+.btn-action-modern {
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    font-size: .85rem;
+    color: white !important;
+    text-decoration: none;
+}
+
+.btn-view-modern {
+    background: #38b2ac;
+}
+
+.btn-edit-modern {
+    background: #ed8936;
+}
+
+.btn-delete-modern {
+    background: #e53e3e;
+}

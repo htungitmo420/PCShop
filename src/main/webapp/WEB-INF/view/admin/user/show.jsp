@@ -15,7 +15,6 @@
 <body>
 <div class="app">
     <jsp:include page="../layout/header.jsp"/>
-
     <jsp:include page="../layout/sidebar.jsp"/>
 
     <div class="with-sidebar">
@@ -111,9 +110,9 @@
                 </div>
             </div>
 
-            <jsp:include page="../layout/footer.jsp"/>
         </main>
     </div>
+    <jsp:include page="../layout/footer.jsp"/>
 </div>
 
 <div class="sidebar-overlay"></div>

@@ -1,55 +1,126 @@
-<!-- File: src/main/webapp/WEB-INF/view/admin/product/detail.jsp -->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product - NHT-PCSHOP</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Product Management - NHT-PCSHOP</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Custom CSS -->
-    <link href="<c:url value='/resources/css/admin/style.css'/>" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <link href="<c:url value='/resources/admin/css/admin-layout.css'/>" rel="stylesheet"/>
+    <link href="<c:url value='/resources/admin/css/product-show.css'/>" rel="stylesheet"/>
+    <link href="<c:url value='/resources/admin/css/product-form.css'/>" rel="stylesheet"/>
 </head>
 <body>
-<div class="wrapper">
-    <!-- Header -->
+<div class="app">
     <jsp:include page="../layout/header.jsp"/>
-
-    <!-- Sidebar -->
     <jsp:include page="../layout/sidebar.jsp"/>
 
-    <!-- Main Content -->
-    <main id="main-content" class="main-content">
-        <div class="container-fluid p-4">
-            <h1 class="mb-1">Product</h1>
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Product</li>
-                </ol>
-            </nav>
-
-            <!-- Page content -->
-            <div class="card">
-                <div class="card-body">
-                    product here
+    <div class="with-sidebar">
+        <main id="main-content">
+            <div class="container-fluid p-4">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <h1><i class="fas fa-boxes me-2"></i>Product Management</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="/admin"><i class="fas fa-home me-1"></i>Dashboard</a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">Products</li>
+                        </ol>
+                    </nav>
                 </div>
-            </div>
-        </div>
 
-        <!-- Footer -->
-        <jsp:include page="../layout/footer.jsp"/>
-    </main>
+                <!-- Stats -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="stats-card">
+                            <div class="icon-box">
+                                <i class="fas fa-box"></i>
+                            </div>
+                            <div class="stats-info">
+                                <h2>${products.size()}</h2>
+                                <p>Total Products</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product List -->
+                <div class="product-card">
+                    <div class="product-card-header">
+                        <h3><i class="fas fa-table me-2"></i>Product List</h3>
+                        <a href="/admin/product/create" class="btn-create-modern">
+                            <i class="fas fa-plus-circle"></i>Create New Product
+                        </a>
+                    </div>
+
+                    <c:choose>
+                        <c:when test="${empty products}">
+                            <div class="empty-state-modern">
+                                <i class="fas fa-box-open fa-4x"></i>
+                                <h3>No Product Found</h3>
+                                <p>Start by creating your first product</p>
+                            </div>
+                        </c:when>
+
+                        <c:otherwise>
+                            <table class="table product-table">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Factory</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <c:forEach var="product" items="${products}">
+                                    <tr>
+                                        <td><strong>${product.id}</strong></td>
+                                        <td>${product.name}</td>
+                                        <td><strong>$${product.price}</strong></td>
+                                        <td>${product.factory}</td>
+                                        <td>
+                                            <div class="action-buttons-modern">
+                                                <a href="/admin/product/${product.id}"
+                                                   class="btn-action-modern btn-view-modern">
+                                                    <i class="fas fa-eye"></i> View
+                                                </a>
+                                                <a href="/admin/product/update/${product.id}"
+                                                   class="btn-action-modern btn-edit-modern">
+                                                    <i class="fas fa-edit"></i> Edit
+                                                </a>
+                                                <a href="/admin/product/delete/${product.id}"
+                                                   class="btn-action-modern btn-delete-modern">
+                                                    <i class="fas fa-trash"></i> Delete
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                                </tbody>
+                            </table>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+
+            </div>
+
+        </main>
+    </div>
+    <jsp:include page="../layout/footer.jsp"/>
 </div>
 
-<!-- Bootstrap JS -->
+<div class="sidebar-overlay"></div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="<c:url value='/resources/js/scripts.js'/>"></script>
+<script src="<c:url value='/resources/admin/js/scripts.js'/>"></script>
+
 </body>
 </html>

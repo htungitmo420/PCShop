@@ -1,0 +1,132 @@
+/* ============================
+   PRODUCT FORM PAGE LAYOUT
+   ============================ */
+
+/* Không đụng vào body, .app, .with-sidebar, #main-content
+   để tránh phá layout sidebar của admin-layout.css */
+
+/* CARD WRAPPER */
+.form-card-modern {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* PAGE HEADER */
+.form-header-modern {
+    margin-bottom: 1.5rem;
+}
+
+.form-header-modern h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+.form-header-modern .breadcrumb {
+    background: transparent;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+.form-header-modern .breadcrumb a {
+    text-decoration: none;
+    color: #4f46e5;
+}
+
+/* FORM LABELS */
+.form-modern label {
+    font-weight: 600;
+    margin-bottom: .35rem;
+    color: #374151;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.form-modern .required::after {
+    content: "*";
+    color: #e11d48;
+    margin-left: 4px;
+    font-size: .9rem;
+}
+
+/* INPUTS */
+.form-modern .form-control,
+.form-modern .form-select,
+.form-modern textarea {
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    border: 1px solid #d1d5db;
+    transition: all .2s ease;
+}
+
+.form-modern .form-control:focus,
+.form-modern textarea:focus,
+.form-modern .form-select:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+/* IMAGE PREVIEW */
+.image-preview-box {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.image-preview-box img {
+    max-height: 200px;
+    width: auto;
+}
+
+/* FORM ACTION BUTTONS */
+.form-actions-modern {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.btn-cancel-modern {
+    background: #e5e7eb;
+    color: #1f2937;
+    padding: .7rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background .2s ease;
+}
+
+.btn-cancel-modern:hover {
+    background: #d1d5db;
+}
+
+.btn-save-modern {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: .7rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .2s ease;
+}
+
+.btn-save-modern:hover {
+    opacity: 0.9;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .form-actions-modern {
+        flex-direction: column;
+    }
+
+    .btn-save-modern,
+    .btn-cancel-modern {
+        width: 100%;
+        text-align: center;
+    }
+}

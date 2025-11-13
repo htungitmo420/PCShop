@@ -41,7 +41,7 @@ public class UserController {
     @PostMapping("/admin/user/create")
     public String createUserPage(@ModelAttribute("newUser") User user,
                                  @RequestParam("imageFile") MultipartFile file) {
-        String fileName = uploadService.handleSaveUploadFile(file);
+        String fileName = uploadService.handleAvatarUploadFile(file);
         if (fileName != null) {
             user.setAvatar(fileName);
         }
@@ -85,7 +85,7 @@ public class UserController {
 
         uploadService.updateUserAvatar(currentUser, file);
         userService.updateUserRole(currentUser, user);
-        userService.updateUserBasicInfo(currentUser, user);
+        userService.updateUserInfo(currentUser, user);
 
         userService.handleSaveUser(currentUser);
         return "redirect:/admin/user";

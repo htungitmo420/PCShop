@@ -7,7 +7,7 @@
         </div>
 
         <div class="user-menu">
-            <span class="text-muted d-none d-md-inline">Welcome,</span>
+            <span class="d-none d-md-inline">Welcome,</span>
             <strong class="d-none d-md-inline">
                 <c:out value="${sessionScope.currentUser != null ? sessionScope.currentUser.fullName : 'Guest'}"/>
             </strong>

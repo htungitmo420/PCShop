@@ -39,5 +39,7 @@ public class ProductService {
         currentProduct.setSold(productWithNewData.getSold());
         currentProduct.setDetailDesc(productWithNewData.getDetailDesc());
         currentProduct.setShortDesc(productWithNewData.getShortDesc());
+        currentProduct.setFactory(productWithNewData.getFactory());
+        currentProduct.setTarget(productWithNewData.getTarget());
     }
 }

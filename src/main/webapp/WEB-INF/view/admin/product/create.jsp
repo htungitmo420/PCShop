@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link href="<c:url value='/resources/admin/css/admin-layout.css'/>" rel="stylesheet"/>
     <link href="<c:url value='/resources/admin/css/admin-form.css'/>" rel="stylesheet"/>
-    <link href="<c:url value='/resources/admin/css/admin-validation.css'/>" rel="stylesheet"/>
 </head>
 
 <body>
@@ -53,7 +52,6 @@
                                action="/admin/product/create"
                                modelAttribute="newProduct"
                                enctype="multipart/form-data">
-
                         <div class="row g-4">
 
                             <!-- Product Name -->
@@ -62,11 +60,11 @@
                                     <label class="form-label required">
                                         <i class="fas fa-tag me-2"></i>Product Name
                                     </label>
-                                    <form:input path="name"
-                                                cssClass="form-control"
-                                                cssErrorClass="form-control is-invalid"
-                                                placeholder="Enter product name"/>
-                                    <form:errors path="name" cssClass="invalid-feedback"/>
+                                    <form:input path="name" type="text"
+                                                class="form-control"
+                                                placeholder="Enter product name" required="required"/>
+                                    <div class="invalid-feedback">Please provide a valid product name.
+                                    </div>
                                 </div>
                             </div>
 
@@ -77,10 +75,10 @@
                                         <i class="fas fa-dollar-sign me-2"></i>Price
                                     </label>
                                     <form:input path="price" type="number"
-                                                cssClass="form-control"
-                                                cssErrorClass="form-control is-invalid"
-                                                placeholder="0.00" step="0.01"/>
-                                    <form:errors path="price" cssClass="invalid-feedback"/>
+                                                class="form-control" min="0" step="0.01"
+                                                placeholder="Enter price" required="required"/>
+                                    <div class="invalid-feedback">Please provide a valid price.
+                                    </div>
                                 </div>
                             </div>
 
@@ -90,11 +88,20 @@
                                     <label class="form-label required">
                                         <i class="fas fa-industry me-2"></i>Factory
                                     </label>
-                                    <form:input path="factory"
-                                                cssClass="form-control"
-                                                cssErrorClass="form-control is-invalid"
-                                                placeholder="Apple, Samsung, Xiaomi..."/>
-                                    <form:errors path="factory" cssClass="invalid-feedback"/>
+
+                                    <form:select path="factory" class="form-control" required="required">
+                                        <form:option value="">-- Select Factory --</form:option>
+                                        <form:option value="Apple">Apple</form:option>
+                                        <form:option value="Samsung">Samsung</form:option>
+                                        <form:option value="Xiaomi">Xiaomi</form:option>
+                                        <form:option value="Asus">Asus</form:option>
+                                        <form:option value="Dell">Dell</form:option>
+                                        <form:option value="Lenovo">Lenovo</form:option>
+                                        <form:option value="HP">HP</form:option>
+                                    </form:select>
+
+                                    <div class="invalid-feedback">Please choose factory.
+                                    </div>
                                 </div>
                             </div>
 
@@ -104,9 +111,16 @@
                                     <label class="form-label">
                                         <i class="fas fa-users me-2"></i>Target User
                                     </label>
-                                    <form:input path="target"
-                                                cssClass="form-control"
-                                                placeholder="e.g. Students, Office, Gaming..."/>
+
+                                    <form:select path="target" class="form-control">
+                                        <form:option value="">-- Select Target User --</form:option>
+                                        <form:option value="Student">Students</form:option>
+                                        <form:option value="Office">Office</form:option>
+                                        <form:option value="Gaming">Gaming</form:option>
+                                        <form:option value="Graphic">Graphic Designer</form:option>
+                                        <form:option value="Developer">Developers</form:option>
+                                    </form:select>
+
                                 </div>
                             </div>
 
@@ -116,7 +130,7 @@
                                     <label class="form-label">
                                         <i class="fas fa-boxes me-2"></i>Quantity
                                     </label>
-                                    <form:input path="quantity" type="number" cssClass="form-control"/>
+                                    <form:input path="quantity" type="number" min="0" class="form-control"/>
                                 </div>
                             </div>
 
@@ -126,7 +140,7 @@
                                     <label class="form-label">
                                         <i class="fas fa-align-left me-2"></i>Short Description
                                     </label>
-                                    <form:textarea path="shortDesc" cssClass="form-control" rows="2"
+                                    <form:textarea path="shortDesc" class="form-control" rows="2"
                                                    placeholder="Short summary..."/>
                                 </div>
                             </div>
@@ -137,7 +151,7 @@
                                     <label class="form-label">
                                         <i class="fas fa-file-alt me-2"></i>Detail Description
                                     </label>
-                                    <form:textarea path="detailDesc" cssClass="form-control" rows="4"
+                                    <form:textarea path="detailDesc" class="form-control" rows="4"
                                                    placeholder="Full product details..."/>
                                 </div>
                             </div>
@@ -169,7 +183,7 @@
                         <!-- Form Actions -->
                         <div class="form-actions">
                             <a href="/admin/product" class="btn-secondary">
-                                <i class="fas fa-times me-2"></i>Cancel
+                                <i class="fas fa-times me-2 mt-1"></i>Cancel
                             </a>
                             <button type="submit" class="btn-primary">
                                 <i class="fas fa-check me-2"></i>Create Product

@@ -72,6 +72,7 @@
                                 <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Image</th>
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Factory</th>
@@ -83,6 +84,24 @@
                                 <c:forEach var="product" items="${products}">
                                     <tr>
                                         <td><strong>${product.id}</strong></td>
+                                        <td>
+                                            <div class="product-image-cell">
+                                                <c:choose>
+                                                    <c:when test="${not empty product.image}">
+                                                        <img src="<c:url value='/resources/admin/images/product/${product.image}'/>"
+                                                             alt="${product.name}"
+                                                             class="product-thumbnail"
+                                                             onerror="this.onerror=null; this.src='<c:url
+                                                                     value='/resources/images/no-image.png'/>'"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <div class="no-image">
+                                                            <i class="fas fa-image"></i>
+                                                        </div>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                        </td>
                                         <td>${product.name}</td>
                                         <td><strong>$${product.price}</strong></td>
                                         <td>${product.factory}</td>

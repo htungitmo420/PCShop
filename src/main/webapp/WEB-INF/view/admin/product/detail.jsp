@@ -52,8 +52,10 @@
                             <div class="user-avatar-large">
                                 <c:choose>
                                     <c:when test="${not empty product.image}">
-                                        <img src="<c:url value='/images/product/${product.image}'/>"
-                                             alt="${product.name}"/>
+                                        <img src="<c:url value='/resources/admin/images/product/${product.image}'/>"
+                                             alt="${product.name}"
+                                             onerror="this.onerror=null; this.src='<c:url
+                                                     value='/resources/images/no-image.png'/>'"/>
                                     </c:when>
                                     <c:otherwise>
                                         <i class="fas fa-box"></i>

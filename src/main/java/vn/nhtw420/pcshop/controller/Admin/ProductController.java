@@ -37,7 +37,8 @@ public class ProductController {
     @PostMapping("/admin/product/create")
     public String createProduct(@ModelAttribute("newProduct") Product product,
                                 @RequestParam("imageFile") MultipartFile file) {
-        String fileName = uploadService.handleAvatarUploadFile(file);
+        String fileName = uploadService.handleImageUploadFile(file);
+
         if (fileName != null) {
             product.setImage(fileName);
         }
@@ -67,16 +68,21 @@ public class ProductController {
                                     @ModelAttribute("newProduct") Product product,
                                     @RequestParam("imageFile") MultipartFile file) {
         Product currentProduct = productService.getProductId(product.getId());
-        if (currentProduct == null) {
-            return "redirect:/admin/product";
+        if (currentProduct == null) return "redirect:/admin/product";
+
+        if (!file.isEmpty()) {
+            if (currentProduct.getImage() != null && !currentProduct.getImage().isEmpty()) {
+                uploadService.deleteFile("resources/admin/images/product", currentProduct.getImage());
+            }
+            String image = this.uploadService.handleImageUploadFile(file);
+            currentProduct.setImage(image);
         }
 
-        uploadService.updateProductImage(currentProduct, file);
         productService.updateProductInfo(currentProduct, product);
-
         productService.handleSaveProduct(currentProduct);
         return "redirect:/admin/product";
     }
+
 
     @GetMapping("/admin/product/delete/{id}")
     public String getDeleteProduct(Model model, @PathVariable long id) {

@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.nhtw420.pcshop.domain.Role;
 import vn.nhtw420.pcshop.domain.User;
 import vn.nhtw420.pcshop.service.UploadService;
 import vn.nhtw420.pcshop.service.UserService;
@@ -42,14 +43,16 @@ public class UserController {
     public String createUserPage(@ModelAttribute("newUser") User user,
                                  @RequestParam("imageFile") MultipartFile file) {
         String fileName = uploadService.handleAvatarUploadFile(file);
-        if (fileName != null) {
+        if (fileName != null && !fileName.isEmpty()) {
             user.setAvatar(fileName);
         }
 
-        String hashPassword = this.passwordEncoder.encode(user.getPassword());
-        user.setPassword(hashPassword);
+        user.setPassword(this.passwordEncoder.encode(user.getPassword()));
 
-        user.setRole(this.userService.getRoleByName(user.getRole().getName()));
+        if (user.getRole() != null && user.getRole().getId() > 0) {
+            Role role = userService.getRoleById(user.getRole().getId());
+            user.setRole(role);
+        }
 
         userService.handleSaveUser(user);
         return "redirect:/admin/user";
@@ -83,7 +86,16 @@ public class UserController {
             return "redirect:/admin/user";
         }
 
-        uploadService.updateUserAvatar(currentUser, file);
+        if (!file.isEmpty()) {
+            if (currentUser.getAvatar() != null && !currentUser.getAvatar().isEmpty()) {
+                uploadService.deleteFile("resources/admin/image/user", currentUser.getAvatar());
+            }
+            String avatar = this.uploadService.handleAvatarUploadFile(file);
+            if (avatar != null && !avatar.isEmpty()) {
+                currentUser.setAvatar(avatar);
+            }
+        }
+
         userService.updateUserRole(currentUser, user);
         userService.updateUserInfo(currentUser, user);
 

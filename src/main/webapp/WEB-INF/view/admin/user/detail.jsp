@@ -43,8 +43,10 @@
                             <div class="user-avatar-large">
                                 <c:choose>
                                     <c:when test="${not empty user.avatar}">
-                                        <img src="<c:url value='/images/avatar/${user.avatar}'/>"
-                                             alt="${user.fullName}"/>
+                                        <img src="<c:url value='/resources/admin/images/avatar/${user.avatar}'/>"
+                                             alt="${avatar.fullName}"
+                                             onerror="this.onerror=null; this.src='<c:url
+                                                     value='/resources/images/no-image.png'/>'"/>
                                     </c:when>
                                     <c:otherwise>
                                         <i class="fas fa-user"></i>

@@ -76,6 +76,7 @@ body {
 .product-card {
     background: white;
     border-radius: 20px;
+    overflow: hidden;
     padding: 0;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
@@ -93,6 +94,15 @@ body {
     font-weight: 600;
     margin: 0;
     color: #2d3748;
+}
+
+.product-card table {
+    border: none;
+    border-collapse: collapse;
+}
+
+.product-card table tbody tr:last-child td {
+    border-bottom: none;
 }
 
 /* CREATE BUTTON */

@@ -60,6 +60,5 @@ public class UserService {
         currentUser.setAddress(userWithNewData.getAddress());
         currentUser.setFullName(userWithNewData.getFullName());
         currentUser.setPhoneNumber(userWithNewData.getPhoneNumber());
-        currentUser.setAvatar((userWithNewData.getAvatar()));
     }
 }

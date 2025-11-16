@@ -68,6 +68,7 @@
                                     <thead>
                                     <tr>
                                         <th><i class="fas fa-hashtag me-2"></i>ID</th>
+                                        <th><i class="fas fa-image me-2"></i>Avatar</th>
                                         <th><i class="fas fa-envelope me-2"></i>Email</th>
                                         <th><i class="fas fa-user me-2"></i>Full Name</th>
                                         <th><i class="fas fa-user-tag me-2"></i>Role</th>
@@ -78,6 +79,24 @@
                                     <c:forEach var="user" items="${users}">
                                         <tr>
                                             <th>${user.id}</th>
+                                            <td>
+                                                <div class="user-image-cell">
+                                                    <c:choose>
+                                                        <c:when test="${not empty user.avatar}">
+                                                            <img src="<c:url value='/resources/admin/images/avatar/${user.avatar}'/>"
+                                                                 alt="${user.fullName}"
+                                                                 class="user-thumbnail"
+                                                                 onerror="this.onerror=null; this.src='<c:url
+                                                                         value='/resources/images/no-image.png'/>'"/>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <div class="no-image">
+                                                                <i class="fas fa-image"></i>
+                                                            </div>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
+                                            </td>
                                             <td>${user.email}</td>
                                             <td><strong>${user.fullName}</strong></td>
                                             <td>

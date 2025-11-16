@@ -128,8 +128,10 @@
                                     <div class="current-avatar">
                                         <label class="form-label">Current Avatar:</label>
                                         <div class="avatar-preview">
-                                            <img src="<c:url value='/images/avatar/${newUser.avatar}'/>"
-                                                 alt="Current avatar" id="currentAvatar"/>
+                                            <img src="<c:url value='/resources/admin/images/avatar/${newUser.avatar}'/>"
+                                                 alt="Current image" id="currentAvatar"
+                                                 onerror="this.onerror=null; this.src='<c:url
+                                                         value='/resources/images/no-image.png'/>'"/>
                                         </div>
                                     </div>
                                 </div>

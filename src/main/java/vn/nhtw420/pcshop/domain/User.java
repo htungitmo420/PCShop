@@ -21,7 +21,7 @@ public class User {
     private String avatar;
 
     //User many -> to one Role
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "role_id")
     private Role role;
     @OneToMany(mappedBy = "user")

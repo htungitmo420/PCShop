@@ -124,7 +124,7 @@ body {
     font-weight: 600;
     text-transform: uppercase;
     font-size: 0.875rem;
-    padding: 1rem;
+    padding: 0rem;
     border: none;
 }
 
@@ -283,4 +283,55 @@ body {
         gap: 1rem;
         align-items: flex-start;
     }
+}
+
+.user-image-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-thumbnail {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #e9ecef;
+}
+
+.no-image {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border-radius: 50%;
+    border: 2px solid #e9ecef;
+    color: #6c757d;
+}
+
+.no-image i {
+    font-size: 20px;
+}
+
+/* Make columns breathe horizontally */
+.table {
+    border-collapse: separate; /* already set, keep it */
+    border-spacing: 16px 0; /* horizontal gap between columns */
+}
+
+/* Give the AVATAR column a bit more room and keep it centered */
+.table thead th:nth-child(2),
+.table tbody td:nth-child(2) {
+    text-align: center;
+    vertical-align: middle;
+    width: 120px; /* was 90px */
+    padding-right: 0; /* avoid double spacing with border-spacing */
+}
+
+/* Slightly increase left padding on EMAIL for readability */
+.table thead th:nth-child(3),
+.table tbody td:nth-child(3) {
+    padding-left: 6px;
 }

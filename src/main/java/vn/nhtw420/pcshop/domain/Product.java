@@ -12,12 +12,20 @@ public class Product {
     private String name;
     private double price;
     private String image;
+
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
     private String shortDesc;
     private long quantity;
     private long sold;
-    private String factory;
-    private String target;
+
+    @ManyToOne
+    @JoinColumn(name = "factory_id")
+    private Factory factory;
+
+    @ManyToOne
+    @JoinColumn(name = "target_id")
+    private Target target;
 
     public long getId() {
         return id;
@@ -83,19 +91,19 @@ public class Product {
         this.sold = sold;
     }
 
-    public String getFactory() {
+    public Factory getFactory() {
         return factory;
     }
 
-    public void setFactory(String factory) {
+    public void setFactory(Factory factory) {
         this.factory = factory;
     }
 
-    public String getTarget() {
+    public Target getTarget() {
         return target;
     }
 
-    public void setTarget(String target) {
+    public void setTarget(Target target) {
         this.target = target;
     }
 
@@ -110,8 +118,8 @@ public class Product {
                 ", shortDesc='" + shortDesc + '\'' +
                 ", quantity=" + quantity +
                 ", sold=" + sold +
-                ", factory='" + factory + '\'' +
-                ", target='" + target + '\'' +
+                ", factory=" + factory +
+                ", target=" + target +
                 '}';
     }
 }

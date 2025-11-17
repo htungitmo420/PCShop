@@ -33,10 +33,8 @@ public class ProductService {
 
     public void updateProductInfo(Product currentProduct, Product productWithNewData) {
         currentProduct.setName(productWithNewData.getName());
-        currentProduct.setImage(productWithNewData.getImage());
         currentProduct.setPrice(productWithNewData.getPrice());
         currentProduct.setQuantity(productWithNewData.getQuantity());
-        currentProduct.setSold(productWithNewData.getSold());
         currentProduct.setDetailDesc(productWithNewData.getDetailDesc());
         currentProduct.setShortDesc(productWithNewData.getShortDesc());
         currentProduct.setFactory(productWithNewData.getFactory());

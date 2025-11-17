@@ -7,7 +7,7 @@
     <div class="nav-title">Management</div>
 
     <a class="nav-link ${fn:contains(uri, '/admin/user') ? 'active' : ''}" href="/admin/user">
-        <i class="fa-solid fa-users"></i> <span>Users</span>
+        <i class="fa-solid fa-user-circle"></i> <span>Users</span>
     </a>
     <a class="nav-link ${fn:contains(uri, '/admin/product') ? 'active' : ''}" href="/admin/product">
         <i class="fa-solid fa-box"></i> <span>Products</span>
@@ -15,8 +15,13 @@
     <a class="nav-link ${fn:contains(uri, '/admin/order') ? 'active' : ''}" href="/admin/order">
         <i class="fa-solid fa-receipt"></i> <span>Orders</span>
     </a>
+    <a class="nav-link ${fn:contains(uri, '/admin/manufacturer') ? 'active' : ''}" href="/admin/manufacturer">
+        <i class="fa-solid fa-industry"></i> <span>Manufacturer</span>
+    </a>
+    <a class="nav-link ${fn:contains(uri, '/admin/audience') ? 'active' : ''}" href="/admin/audience">
+        <i class="fa-solid fa-users"></i> <span>Audiences</span>
+    </a>
 
     <div class="nav-title" style="margin-top:1rem;">Shortcuts</div>
-    <a class="nav-link" href="/admin/settings"><i class="fa-solid fa-gear"></i> Settings</a>
     <a class="nav-link" href="/"><i class="fa-solid fa-arrow-left"></i> Back to site</a>
 </aside>

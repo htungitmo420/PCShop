@@ -10,6 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link href="<c:url value='/resources/admin/css/admin-layout.css'/>" rel="stylesheet"/>
+    <link href="<c:url value='/resources/admin/css/admin-user.css'/>" rel="stylesheet"/>
     <link href="<c:url value='/resources/admin/css/product-show.css'/>" rel="stylesheet"/>
     <link href="<c:url value='/resources/admin/css/product-form.css'/>" rel="stylesheet"/>
 </head>
@@ -50,11 +51,11 @@
                 </div>
 
                 <!-- Product List -->
-                <div class="product-card">
-                    <div class="product-card-header">
-                        <h3><i class="fas fa-table me-2"></i>Product List</h3>
-                        <a href="/admin/product/create" class="btn-create-modern">
-                            <i class="fas fa-plus-circle"></i>Create New Product
+                <div class="card-container">
+                    <div class="card-header-custom">
+                        <h3><i class="fas fa-table"></i>Product List</h3>
+                        <a href="/admin/product/create" class="btn-create">
+                            <i class="fas fa-plus-circle me-1"></i>Create New Product
                         </a>
                     </div>
 
@@ -106,17 +107,17 @@
                                         <td><strong>$${product.price}</strong></td>
                                         <td>${product.factory}</td>
                                         <td>
-                                            <div class="action-buttons-modern">
+                                            <div class="action-buttons">
                                                 <a href="/admin/product/${product.id}"
-                                                   class="btn-action-modern btn-view-modern">
+                                                   class="btn-action btn-view">
                                                     <i class="fas fa-eye"></i> View
                                                 </a>
                                                 <a href="/admin/product/update/${product.id}"
-                                                   class="btn-action-modern btn-edit-modern">
+                                                   class="btn-action btn-edit">
                                                     <i class="fas fa-edit"></i> Edit
                                                 </a>
                                                 <a href="/admin/product/delete/${product.id}"
-                                                   class="btn-action-modern btn-delete-modern">
+                                                   class="btn-action btn-delete">
                                                     <i class="fas fa-trash"></i> Delete
                                                 </a>
                                             </div>

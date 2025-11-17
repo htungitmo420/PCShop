@@ -59,6 +59,7 @@ public class ProductController {
     public String getUpdateProduct(Model model, @PathVariable long id) {
         Product currentProduct = this.productService.getProductId(id);
         model.addAttribute("newProduct", currentProduct);
+        model.addAttribute("id", id);
         return "admin/product/update";
     }
 
@@ -70,19 +71,21 @@ public class ProductController {
         Product currentProduct = productService.getProductId(product.getId());
         if (currentProduct == null) return "redirect:/admin/product";
 
-        if (!file.isEmpty()) {
+        if (file != null && !file.isEmpty() && file.getOriginalFilename() != null && !file.getOriginalFilename().isBlank()) {
             if (currentProduct.getImage() != null && !currentProduct.getImage().isEmpty()) {
                 uploadService.deleteFile("resources/admin/images/product", currentProduct.getImage());
             }
+
             String image = this.uploadService.handleImageUploadFile(file);
-            currentProduct.setImage(image);
+            if (image != null && !image.isEmpty()) {
+                currentProduct.setImage(image);
+            }
         }
 
         productService.updateProductInfo(currentProduct, product);
         productService.handleSaveProduct(currentProduct);
         return "redirect:/admin/product";
     }
-
 
     @GetMapping("/admin/product/delete/{id}")
     public String getDeleteProduct(Model model, @PathVariable long id) {

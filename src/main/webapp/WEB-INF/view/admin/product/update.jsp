@@ -7,7 +7,8 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Update Product - NHT-PCSHOP</title>
-
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
     <link href="<c:url value='/resources/admin/css/admin-layout.css'/>" rel="stylesheet"/>
@@ -92,13 +93,15 @@
                                         <i class="fas fa-industry me-2"></i>Factory
                                     </label>
 
-                                    <form:select path="factory" class="form-control selectpicker"
-                                                 data-live-search="true">
-                                        <form:option value="">-- Select Factory --</form:option>
+                                    <select name="factoryId" class="form-select selectpicker" data-live-search="true"
+                                            required>
+                                        <option value="">-- Select Factory --</option>
                                         <c:forEach var="f" items="${factories}">
-                                            <form:option value="${f.name}">${f.name}</form:option>
+                                            <option value="${f.id}" ${newProduct.factory.id == f.id ? 'selected' : ''}>
+                                                    ${f.name}
+                                            </option>
                                         </c:forEach>
-                                    </form:select>
+                                    </select>
 
                                     <div class="invalid-feedback">Please choose factory.</div>
                                 </div>
@@ -111,13 +114,14 @@
                                         <i class="fas fa-users me-2"></i>Target User
                                     </label>
 
-                                    <form:select path="target" class="form-control selectpicker"
-                                                 data-live-search="true">
-                                        <form:option value="">-- Select Target User --</form:option>
+                                    <select name="targetId" class="form-select selectpicker" data-live-search="true">
+                                        <option value="">-- Select Target User --</option>
                                         <c:forEach var="t" items="${targets}">
-                                            <form:option value="${t.name}">${t.name}</form:option>
+                                            <option value="${t.id}" ${newProduct.target.id == t.id ? 'selected' : ''}>
+                                                    ${t.name}
+                                            </option>
                                         </c:forEach>
-                                    </form:select>
+                                    </select>
                                 </div>
                             </div>
 
@@ -213,7 +217,8 @@
 </div>
 
 <div class="sidebar-overlay"></div>
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
     // Image Preview

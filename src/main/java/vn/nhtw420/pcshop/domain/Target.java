@@ -36,9 +36,6 @@ public class Target {
 
     @Override
     public String toString() {
-        return "Target{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return this.name;
     }
 }

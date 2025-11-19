@@ -105,7 +105,16 @@
                                         </td>
                                         <td>${product.name}</td>
                                         <td><strong>$${product.price}</strong></td>
-                                        <td>${product.factory}</td>
+                                        <td>
+                                            <c:choose>
+                                                <c:when test="${not empty product.factory}">
+                                                    ${product.factory.name}
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <span class="text-muted">N/A</span>
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </td>
                                         <td>
                                             <div class="action-buttons">
                                                 <a href="/admin/product/${product.id}"

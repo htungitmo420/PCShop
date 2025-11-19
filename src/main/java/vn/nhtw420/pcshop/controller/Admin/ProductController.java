@@ -44,9 +44,23 @@ public class ProductController {
 
     @PostMapping("/admin/product/create")
     public String createProduct(@ModelAttribute("newProduct") Product product,
-                                @RequestParam("imageFile") MultipartFile file) {
-        String fileName = uploadService.handleImageUploadFile(file);
+                                @RequestParam("imageFile") MultipartFile file,
+                                @RequestParam(value = "factoryId", required = false) Long factoryId,
+                                @RequestParam(value = "targetId", required = false) Long targetId) {
 
+        // Set factory
+        if (factoryId != null) {
+            var factory = factoryService.getById(factoryId);
+            product.setFactory(factory);
+        }
+
+        // Set target
+        if (targetId != null) {
+            var target = targetService.getById(targetId);
+            product.setTarget(target);
+        }
+
+        String fileName = uploadService.handleImageUploadFile(file);
         if (fileName != null) {
             product.setImage(fileName);
         }
@@ -72,13 +86,27 @@ public class ProductController {
         model.addAttribute("id", id);
         return "admin/product/update";
     }
-    
+
     @PostMapping("/admin/product/update")
     public String postUpdateProduct(Model model,
                                     @ModelAttribute("newProduct") Product product,
-                                    @RequestParam("imageFile") MultipartFile file) {
+                                    @RequestParam("imageFile") MultipartFile file,
+                                    @RequestParam(value = "factoryId", required = false) Long factoryId,
+                                    @RequestParam(value = "targetId", required = false) Long targetId) {
         Product currentProduct = productService.getProductId(product.getId());
         if (currentProduct == null) return "redirect:/admin/product";
+
+        // Set factory
+        if (factoryId != null) {
+            var factory = factoryService.getById(factoryId);
+            currentProduct.setFactory(factory);
+        }
+
+        // Set target
+        if (targetId != null) {
+            var target = targetService.getById(targetId);
+            currentProduct.setTarget(target);
+        }
 
         if (file != null && !file.isEmpty() && file.getOriginalFilename() != null && !file.getOriginalFilename().isBlank()) {
             if (currentProduct.getImage() != null && !currentProduct.getImage().isEmpty()) {
@@ -108,7 +136,8 @@ public class ProductController {
 
     @PostMapping("admin/product/delete")
     public String postDeleteProduct(@ModelAttribute("newProduct") Product product) {
-        productService.deleteProductId(product.getId());
+        productService.deleteProductId(product.getId(), "resources/admin/images/product");
         return "redirect:/admin/product";
     }
+
 }

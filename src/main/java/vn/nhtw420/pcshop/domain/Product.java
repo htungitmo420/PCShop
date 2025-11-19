@@ -15,11 +15,12 @@ public class Product {
 
     @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
+    @Column(columnDefinition = "TEXT")
     private String shortDesc;
     private long quantity;
     private long sold;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "factory_id")
     private Factory factory;
 

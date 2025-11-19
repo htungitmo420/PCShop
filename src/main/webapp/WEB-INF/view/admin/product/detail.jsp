@@ -105,14 +105,32 @@
                                         <div class="col-md-6">
                                             <div class="info-item">
                                                 <label><i class="fas fa-industry me-2"></i>Factory</label>
-                                                <div class="info-value">${product.factory}</div>
+                                                <div class="info-value">
+                                                    <c:choose>
+                                                        <c:when test="${not empty product.factory}">
+                                                            ${product.factory.name}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="text-muted">N/A</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="info-item">
                                                 <label><i class="fas fa-users me-2"></i>Target</label>
-                                                <div class="info-value">${product.target}</div>
+                                                <div class="info-value">
+                                                    <c:choose>
+                                                        <c:when test="${not empty product.target}">
+                                                            ${product.target.name}
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <span class="text-muted">N/A</span>
+                                                        </c:otherwise>
+                                                    </c:choose>
+                                                </div>
                                             </div>
                                         </div>
 

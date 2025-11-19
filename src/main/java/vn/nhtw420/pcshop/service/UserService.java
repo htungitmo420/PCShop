@@ -13,10 +13,12 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final FileService fileService;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, FileService fileService) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.fileService = fileService;
     }
 
     public List<User> getAllUsers() {
@@ -31,8 +33,14 @@ public class UserService {
         return this.userRepository.findById(id);
     }
 
-    public void deleteUserId(long id) {
-        this.userRepository.deleteById(id);
+    public void deleteUserId(long id, String avatarDir) {
+        User user = this.getUserId(id);
+        if (user != null) {
+            if (user.getAvatar() != null && !user.getAvatar().isEmpty()) {
+                fileService.deleteFile(avatarDir, user.getAvatar());
+            }
+            this.userRepository.deleteById(id);
+        }
     }
 
     public Role getRoleByName(String name) {

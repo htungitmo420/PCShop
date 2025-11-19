@@ -58,21 +58,12 @@ public class UserController {
         return "redirect:/admin/user";
     }
 
-
     @GetMapping("/admin/user/{id}")
     public String getUserDetailPage(Model model, @PathVariable long id) {
         User user = this.userService.getUserId(id);
         model.addAttribute("user", user);
         model.addAttribute("id", id);
         return "admin/user/detail";
-    }
-
-    @GetMapping("/admin/user/update/{id}")
-    public String getUpdateUserPage(Model model, @PathVariable long id) {
-        User currentUser = this.userService.getUserId(id);
-        model.addAttribute("newUser", currentUser);
-        model.addAttribute("roles", this.userService.getAllRoles());
-        return "admin/user/update";
     }
 
     @PostMapping("/admin/user/update")
@@ -88,7 +79,7 @@ public class UserController {
 
         if (!file.isEmpty()) {
             if (currentUser.getAvatar() != null && !currentUser.getAvatar().isEmpty()) {
-                uploadService.deleteFile("resources/admin/image/user", currentUser.getAvatar());
+                uploadService.deleteFile("resources/admin/images/avatar", currentUser.getAvatar());
             }
             String avatar = this.uploadService.handleAvatarUploadFile(file);
             if (avatar != null && !avatar.isEmpty()) {
@@ -116,7 +107,7 @@ public class UserController {
 
     @PostMapping("/admin/user/delete")
     public String postDeleteUser(@ModelAttribute("newUser") User user) {
-        userService.deleteUserId(user.getId());
+        userService.deleteUserId(user.getId(), "resources/admin/images/avatar");
         return "redirect:/admin/user";
     }
 }

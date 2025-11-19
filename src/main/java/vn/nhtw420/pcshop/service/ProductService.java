@@ -10,9 +10,11 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final FileService fileService;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(ProductRepository productRepository, FileService fileService) {
         this.productRepository = productRepository;
+        this.fileService = fileService;
     }
 
     public List<Product> getAllProducts() {
@@ -27,8 +29,14 @@ public class ProductService {
         return this.productRepository.findById(id);
     }
 
-    public void deleteProductId(long id) {
-        this.productRepository.deleteById(id);
+    public void deleteProductId(long id, String imageDir) {
+        Product product = this.getProductId(id);
+        if (product != null) {
+            if (product.getImage() != null && !product.getImage().isEmpty()) {
+                fileService.deleteFile(imageDir, product.getImage());
+            }
+            this.productRepository.deleteById(id);
+        }
     }
 
     public void updateProductInfo(Product currentProduct, Product productWithNewData) {

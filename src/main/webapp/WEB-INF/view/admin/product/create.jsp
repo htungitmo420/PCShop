@@ -93,13 +93,16 @@
                                         <i class="fas fa-industry me-2"></i>Factory
                                     </label>
 
-                                    <form:select path="factory" class="form-control selectpicker"
-                                                 data-live-search="true">
-                                        <form:option value="">-- Select Factory --</form:option>
+                                    <select name="factoryId" class="form-select selectpicker" data-live-search="true"
+                                            required>
+                                        <option value="">-- Select Factory --</option>
                                         <c:forEach var="f" items="${factories}">
-                                            <form:option value="${f.name}">${f.name}</form:option>
+                                            <option value="${f.id}"
+                                                ${not empty newProduct.factory && newProduct.factory.id == f.id ? 'selected' : ''}>
+                                                    ${f.name}
+                                            </option>
                                         </c:forEach>
-                                    </form:select>
+                                    </select>
 
                                     <div class="invalid-feedback">Please choose factory.</div>
                                 </div>
@@ -112,23 +115,29 @@
                                         <i class="fas fa-users me-2"></i>Target User
                                     </label>
 
-                                    <form:select path="target" class="form-control selectpicker"
-                                                 data-live-search="true">
-                                        <form:option value="">-- Select Target User --</form:option>
+                                    <select name="targetId" class="form-select selectpicker" data-live-search="true">
+                                        <option value="">-- Select Target User --</option>
                                         <c:forEach var="t" items="${targets}">
-                                            <form:option value="${t.name}">${t.name}</form:option>
+                                            <option value="${t.id}"
+                                                ${not empty newProduct.target && newProduct.target.id == t.id ? 'selected' : ''}>
+                                                    ${t.name}
+                                            </option>
                                         </c:forEach>
-                                    </form:select>
+                                    </select>
+
+                                    <div class="invalid-feedback">Please choose target.</div>
                                 </div>
                             </div>
 
                             <!-- Quantity -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label class="form-label">
+                                    <label class="form-label required">
                                         <i class="fas fa-boxes me-2"></i>Quantity
                                     </label>
-                                    <form:input path="quantity" type="number" min="0" class="form-control"/>
+                                    <form:input path="quantity" type="number" min="0" class="form-control"
+                                                required="required"/>
+                                    <div class="invalid-feedback">Please enter valid quantity.</div>
                                 </div>
                             </div>
 
@@ -198,6 +207,8 @@
 </div>
 
 <div class="sidebar-overlay"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 <script>
     // Image Preview
     document.getElementById('productFile')?.addEventListener('change', function (e) {

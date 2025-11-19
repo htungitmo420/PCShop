@@ -36,9 +36,6 @@ public class Factory {
 
     @Override
     public String toString() {
-        return "Factory{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return this.name;
     }
 }

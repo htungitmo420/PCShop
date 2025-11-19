@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -19,15 +20,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="${pageContext.request.contextPath}/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="${pageContext.request.contextPath}/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link href="/resources/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/resources/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="${pageContext.request.contextPath}/client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/client/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="${pageContext.request.contextPath}/client/css/style.css" rel="stylesheet">
+    <link href="/resources/client/css/style.css" rel="stylesheet">
 </head>
 <body>
 
@@ -88,190 +88,37 @@
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-1.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Macbook Pro i9</h4>
-                                            <p>AMD Radeon Graphics</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$499</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
+                                <c:forEach var="product" items="${products}">
+                                    <div class="col-md-6 col-lg-4 col-xl-3">
+                                        <div class="rounded position-relative fruite-item">
+                                            <div class="fruite-img">
+                                                <img src="resources/admin/images/product/${product.image}"
+                                                     class="img-fluid w-100 rounded-top"
+                                                     alt="${product.name}"
+                                                     onerror="this.src='/resources/client/images/fruite-item-1.png'">
+                                            </div>
+                                            <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
+                                                 style="top: 10px; left: 10px;">
+                                                    ${not empty product.factory ? product.factory.name : 'N/A'}
+                                            </div>
+                                            <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                                <h4>${product.name}</h4>
+                                                <p>${product.shortDesc}</p>
+                                                <div class="d-flex justify-content-between flex-lg-wrap">
+                                                    <p class="text-dark fs-5 fw-bold mb-0">
+                                                        <fmt:formatNumber value="${product.price}" type="currency"
+                                                                          currencySymbol="$"/>
+                                                    </p>
+                                                    <a href="#"
+                                                       class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                        Add to cart
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-2.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>MS Surface Go 2</h4>
-                                            <p>Intel Core i5-1135G7 processor</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$199</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-1.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Macbook Pro i9</h4>
-                                            <p>AMD Radeon Graphics</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$499</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-2.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>MS Surface Go 2</h4>
-                                            <p>Intel Core i5-1135G7 processor</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$199</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-1.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Macbook Pro i9</h4>
-                                            <p>AMD Radeon Graphics</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$499</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-2.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>MS Surface Go 2</h4>
-                                            <p>Intel Core i5-1135G7 processor</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$199</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-1.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>Macbook Pro i9</h4>
-                                            <p>AMD Radeon Graphics</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$499</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 col-lg-4 col-xl-3">
-                                    <div class="rounded position-relative fruite-item">
-                                        <div class="fruite-img">
-                                            <img src="resources/client/images/fruite-item-2.png"
-                                                 class="img-fluid w-100 rounded-top" alt="">
-                                        </div>
-                                        <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
-                                             style="top: 10px; left: 10px;">Laptop
-                                        </div>
-                                        <div
-                                                class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                            <h4>MS Surface Go 2</h4>
-                                            <p>Intel Core i5-1135G7 processor</p>
-                                            <div class="d-flex justify-content-between flex-lg-wrap">
-                                                <p class="text-dark fs-5 fw-bold mb-0">$199</p>
-                                                <a href="#"
-                                                   class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                        class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                    Add to cart</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -291,12 +138,12 @@
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="${pageContext.request.contextPath}/client/lib/easing/easing.min.js"></script>
-<script src="${pageContext.request.contextPath}/client/lib/waypoints/waypoints.min.js"></script>
-<script src="${pageContext.request.contextPath}/client/lib/lightbox/js/lightbox.min.js"></script>
-<script src="${pageContext.request.contextPath}/client/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/resources/client/lib/easing/easing.min.js"></script>
+<script src="/resources/client/lib/waypoints/waypoints.min.js"></script>
+<script src="/resources/client/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/resources/client/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="${pageContext.request.contextPath}/client/js/main.js"></script>
+<script src="/resources/client/js/main.js"></script>
 </body>
 </html>

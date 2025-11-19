@@ -14,7 +14,7 @@ public class TargetService {
         this.targetRepository = targetRepository;
     }
 
-    public List<Target> getAll() {
+    public List<Target> getAllTargets() {
         return targetRepository.findAll();
     }
 

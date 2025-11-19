@@ -22,7 +22,7 @@ public class TargetController {
 
     @GetMapping("/admin/audience")
     public String getShowTarget(Model model) {
-        List<Target> targets = this.targetService.getAll();
+        List<Target> targets = this.targetService.getAllTargets();
         model.addAttribute("targets", targets);
         return "admin/target/show";
     }

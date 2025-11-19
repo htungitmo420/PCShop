@@ -5,7 +5,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.nhtw420.pcshop.domain.Product;
+import vn.nhtw420.pcshop.service.FactoryService;
 import vn.nhtw420.pcshop.service.ProductService;
+import vn.nhtw420.pcshop.service.TargetService;
 import vn.nhtw420.pcshop.service.UploadService;
 
 import java.util.List;
@@ -15,10 +17,14 @@ public class ProductController {
 
     private final ProductService productService;
     private final UploadService uploadService;
+    private final FactoryService factoryService;
+    private final TargetService targetService;
 
-    public ProductController(ProductService productService, UploadService uploadService) {
+    public ProductController(ProductService productService, UploadService uploadService, FactoryService factoryService, TargetService targetService) {
         this.productService = productService;
         this.uploadService = uploadService;
+        this.factoryService = factoryService;
+        this.targetService = targetService;
     }
 
     @GetMapping("/admin/product")
@@ -31,6 +37,8 @@ public class ProductController {
     @GetMapping("/admin/product/create")
     public String getCreateProduct(Model model) {
         model.addAttribute("newProduct", new Product());
+        model.addAttribute("factories", factoryService.getAllFactories());
+        model.addAttribute("targets", targetService.getAllTargets());
         return "admin/product/create";
     }
 
@@ -59,11 +67,12 @@ public class ProductController {
     public String getUpdateProduct(Model model, @PathVariable long id) {
         Product currentProduct = this.productService.getProductId(id);
         model.addAttribute("newProduct", currentProduct);
+        model.addAttribute("factories", factoryService.getAllFactories());
+        model.addAttribute("targets", targetService.getAllTargets());
         model.addAttribute("id", id);
         return "admin/product/update";
     }
-
-
+    
     @PostMapping("/admin/product/update")
     public String postUpdateProduct(Model model,
                                     @ModelAttribute("newProduct") Product product,

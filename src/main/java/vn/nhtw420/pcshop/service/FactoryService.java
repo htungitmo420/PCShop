@@ -15,7 +15,7 @@ public class FactoryService {
         this.factoryRepository = factoryRepository;
     }
 
-    public List<Factory> getAll() {
+    public List<Factory> getAllFactories() {
         return factoryRepository.findAll();
     }
 

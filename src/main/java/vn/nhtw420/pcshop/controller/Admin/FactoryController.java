@@ -22,7 +22,7 @@ public class FactoryController {
 
     @GetMapping("/admin/manufacturer")
     public String getShowFactories(Model model) {
-        List<Factory> factories = this.factoryService.getAll();
+        List<Factory> factories = this.factoryService.getAllFactories();
         model.addAttribute("factories", factories);
         return "/admin/factory/show";
     }

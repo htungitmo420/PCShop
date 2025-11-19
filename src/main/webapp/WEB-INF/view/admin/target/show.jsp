@@ -67,7 +67,7 @@
                         </c:when>
 
                         <c:otherwise>
-                            <table class="table table-hover align-middle">
+                            <table class="table align-middle">
                                 <thead>
                                 <tr>
                                     <th style="width: 8%;">ID</th>

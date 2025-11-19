@@ -96,17 +96,12 @@
                                     <form:select path="factory" class="form-control selectpicker"
                                                  data-live-search="true">
                                         <form:option value="">-- Select Factory --</form:option>
-                                        <form:option value="Apple">Apple</form:option>
-                                        <form:option value="Samsung">Samsung</form:option>
-                                        <form:option value="Xiaomi">Xiaomi</form:option>
-                                        <form:option value="Asus">Asus</form:option>
-                                        <form:option value="Dell">Dell</form:option>
-                                        <form:option value="Lenovo">Lenovo</form:option>
-                                        <form:option value="HP">HP</form:option>
+                                        <c:forEach var="f" items="${factories}">
+                                            <form:option value="${f.name}">${f.name}</form:option>
+                                        </c:forEach>
                                     </form:select>
 
-                                    <div class="invalid-feedback">Please choose factory.
-                                    </div>
+                                    <div class="invalid-feedback">Please choose factory.</div>
                                 </div>
                             </div>
 
@@ -120,13 +115,10 @@
                                     <form:select path="target" class="form-control selectpicker"
                                                  data-live-search="true">
                                         <form:option value="">-- Select Target User --</form:option>
-                                        <form:option value="Student">Students</form:option>
-                                        <form:option value="Office">Office</form:option>
-                                        <form:option value="Gaming">Gaming</form:option>
-                                        <form:option value="Graphic">Graphic Designer</form:option>
-                                        <form:option value="Developer">Developers</form:option>
+                                        <c:forEach var="t" items="${targets}">
+                                            <form:option value="${t.name}">${t.name}</form:option>
+                                        </c:forEach>
                                     </form:select>
-
                                 </div>
                             </div>
 

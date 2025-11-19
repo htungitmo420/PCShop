@@ -19,8 +19,8 @@ public class FactoryService {
         return factoryRepository.findAll();
     }
 
-    public Factory handleSaveFactory(Factory factory) {
-        return factoryRepository.save(factory);
+    public void handleSaveFactory(Factory factory) {
+        factoryRepository.save(factory);
     }
 
     public Factory getById(long id) {

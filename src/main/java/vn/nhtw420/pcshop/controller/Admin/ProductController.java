@@ -4,6 +4,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import vn.nhtw420.pcshop.domain.Factory;
+import vn.nhtw420.pcshop.domain.Target;
 import vn.nhtw420.pcshop.domain.Product;
 import vn.nhtw420.pcshop.service.FactoryService;
 import vn.nhtw420.pcshop.service.ProductService;
@@ -80,39 +82,34 @@ public class ProductController {
     @GetMapping("/admin/product/update/{id}")
     public String getUpdateProduct(Model model, @PathVariable long id) {
         Product currentProduct = this.productService.getProductId(id);
+        if (currentProduct == null) {
+            return "redirect:/admin/product";
+        }
+
         model.addAttribute("newProduct", currentProduct);
         model.addAttribute("factories", factoryService.getAllFactories());
         model.addAttribute("targets", targetService.getAllTargets());
-        model.addAttribute("id", id);
+
         return "admin/product/update";
     }
 
+
     @PostMapping("/admin/product/update")
-    public String postUpdateProduct(Model model,
-                                    @ModelAttribute("newProduct") Product product,
-                                    @RequestParam("imageFile") MultipartFile file,
-                                    @RequestParam(value = "factoryId", required = false) Long factoryId,
-                                    @RequestParam(value = "targetId", required = false) Long targetId) {
+    public String postUpdateProduct(
+            @ModelAttribute("newProduct") Product product,
+            @RequestParam("imageFile") MultipartFile file,
+            @RequestParam("factoryId") long factoryId,
+            @RequestParam(value = "targetId", required = false) Long targetId) {
+
         Product currentProduct = productService.getProductId(product.getId());
-        if (currentProduct == null) return "redirect:/admin/product";
-
-        // Set factory
-        if (factoryId != null) {
-            var factory = factoryService.getById(factoryId);
-            currentProduct.setFactory(factory);
+        if (currentProduct == null) {
+            return "redirect:/admin/product";
         }
 
-        // Set target
-        if (targetId != null) {
-            var target = targetService.getById(targetId);
-            currentProduct.setTarget(target);
-        }
-
-        if (file != null && !file.isEmpty() && file.getOriginalFilename() != null && !file.getOriginalFilename().isBlank()) {
+        if (!file.isEmpty()) {
             if (currentProduct.getImage() != null && !currentProduct.getImage().isEmpty()) {
                 uploadService.deleteFile("resources/admin/images/product", currentProduct.getImage());
             }
-
             String image = this.uploadService.handleImageUploadFile(file);
             if (image != null && !image.isEmpty()) {
                 currentProduct.setImage(image);
@@ -120,9 +117,26 @@ public class ProductController {
         }
 
         productService.updateProductInfo(currentProduct, product);
+
+        Factory factory = factoryService.getById(factoryId);
+        if (factory != null) {
+            currentProduct.setFactory(factory);
+        }
+
+        if (targetId != null && targetId > 0) {
+            Target target = targetService.getById(targetId);
+            if (target != null) {
+                currentProduct.setTarget(target);
+            }
+        } else {
+            currentProduct.setTarget(null);
+        }
+
         productService.handleSaveProduct(currentProduct);
+
         return "redirect:/admin/product";
     }
+
 
     @GetMapping("/admin/product/delete/{id}")
     public String getDeleteProduct(Model model, @PathVariable long id) {

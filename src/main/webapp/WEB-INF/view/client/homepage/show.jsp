@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ - NHTShop</title>
+    <title>Trang chủ - NHTPC</title>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,12 +28,26 @@
 
     <!-- Template Stylesheet -->
     <link href="/resources/client/css/style.css" rel="stylesheet">
+
+    <style>
+        /* Đảm bảo thẻ <a> không phá layout card */
+        .product-link-wrapper {
+            display: block;
+            color: inherit !important;
+        }
+
+        .product-link-wrapper:hover {
+            text-decoration: none !important;
+            color: inherit !important;
+        }
+    </style>
 </head>
+
 <body>
 
 <!-- Spinner Start -->
 <div id="spinner"
-     class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
+     class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50 d-flex align-items-center justify-content-center">
     <div class="spinner-grow text-primary" role="status"></div>
 </div>
 <!-- Spinner End -->
@@ -50,8 +64,7 @@
             </div>
             <div class="modal-body d-flex align-items-center">
                 <div class="input-group w-75 mx-auto d-flex">
-                    <input type="search" class="form-control p-3" placeholder="keywords"
-                           aria-describedby="search-icon-1">
+                    <input type="search" class="form-control p-3" placeholder="keywords">
                     <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
                 </div>
             </div>
@@ -61,13 +74,13 @@
 <!-- Modal Search End -->
 
 <jsp:include page="../layout/banner.jsp"/>
-
 <jsp:include page="../layout/feature.jsp"/>
 
-<!-- Fruits Shop Start-->
+<!-- Fruits Shop Start -->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
         <div class="tab-class text-center">
+
             <div class="row g-4">
                 <div class="col-lg-4 text-start">
                     <h1>Sản phẩm nổi bật</h1>
@@ -83,57 +96,84 @@
                     </ul>
                 </div>
             </div>
+
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane fade show p-0 active">
                     <div class="row g-4">
                         <div class="col-lg-12">
                             <div class="row g-4">
+
+                                <!-- LOOP PRODUCTS -->
                                 <c:forEach var="product" items="${products}">
                                     <div class="col-md-6 col-lg-4 col-xl-3">
+
+                                        <!-- LINK BỌC TOÀN BỘ CARD -->
                                         <div class="rounded position-relative fruite-item">
+
+                                            <!-- IMAGE -->
                                             <div class="fruite-img">
                                                 <img src="resources/admin/images/product/${product.image}"
                                                      class="img-fluid w-100 rounded-top"
                                                      alt="${product.name}"
                                                      onerror="this.src='/resources/client/images/fruite-item-1.png'">
                                             </div>
+
+                                            <!-- FACTORY LABEL -->
                                             <div class="text-white bg-secondary px-3 py-1 rounded position-absolute"
                                                  style="top: 10px; left: 10px;">
                                                     ${not empty product.factory ? product.factory.name : 'N/A'}
                                             </div>
+
+                                            <!-- CONTENT -->
                                             <div class="p-4 border border-secondary border-top-0 rounded-bottom">
-                                                <h4>${product.name}</h4>
+
+                                                <h4 class="text-dark">
+                                                    <a href="/product/${product.id}" class="product-title-link">
+                                                            ${product.name}
+                                                    </a>
+                                                </h4>
+
+
                                                 <p>${product.shortDesc}</p>
-                                                <div class="d-flex justify-content-between flex-lg-wrap">
+
+                                                <div class="d-flex justify-content-between flex-lg-wrap align-items-center">
+
                                                     <p class="text-dark fs-5 fw-bold mb-0">
-                                                        <fmt:formatNumber value="${product.price}" type="currency"
+                                                        <fmt:formatNumber value="${product.price}"
+                                                                          type="currency"
                                                                           currencySymbol="$"/>
                                                     </p>
-                                                    <a href="#"
-                                                       class="btn border border-secondary rounded-pill px-3 text-primary">
-                                                        <i class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                        Add to cart
-                                                    </a>
+
+                                                    <span class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                            <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                            Add to cart
+                                                        </span>
                                                 </div>
+
                                             </div>
                                         </div>
+                                        <!-- END LINK -->
+
                                     </div>
                                 </c:forEach>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
-<!-- Fruits Shop End-->
+<!-- Fruits Shop End -->
 
 <jsp:include page="../layout/footer.jsp"/>
 
 <!-- Back to Top -->
-<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top"><i
-        class="fa fa-arrow-up"></i></a>
+<a href="#" class="btn btn-primary border-3 border-primary rounded-circle back-to-top">
+    <i class="fa fa-arrow-up"></i>
+</a>
 
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
@@ -145,5 +185,6 @@
 
 <!-- Template Javascript -->
 <script src="/resources/client/js/main.js"></script>
+
 </body>
 </html>

@@ -1,11 +1,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
-    <title>Fruitables - Vegetable Website Template</title>
+    <title>${product.name} - NHTPC</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -22,15 +23,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="resources/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="resources/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
-
+    <link href="/resources/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <link href="/resources/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="resources/client/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/client/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Template Stylesheet -->
-    <link href="resources/client/css/style.css" rel="stylesheet">
+    <link href="/resources/client/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -53,26 +53,21 @@
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="resources/client/images/single-item.jpg" class="img-fluid rounded"
-                                     alt="Image">
+                                <img src="/resources/admin/images/product/${product.image}"
+                                     class="img-fluid rounded"
+                                     alt="${product.name}"
+                                     onerror="this.src='/resources/client/images/single-item.jpg'">
                             </a>
                         </div>
                     </div>
                     <div class="col-lg-6">
-                        <h4 class="fw-bold mb-3">Brocoli</h4>
-                        <p class="mb-3">Category: Vegetables</p>
-                        <h5 class="fw-bold mb-3">3,35 $</h5>
-                        <div class="d-flex mb-4">
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star text-secondary"></i>
-                            <i class="fa fa-star"></i>
-                        </div>
-                        <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition
-                            injected humour, or non-characteristic words etc.</p>
-                        <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock
-                            flounder; chain pickerel hatchetfish, pencilfish snailfish</p>
+                        <h4 class="fw-bold mb-3">${product.name}</h4>
+                        <p class="mb-3">Factory: ${not empty product.factory ? product.factory.name : 'N/A'}</p>
+                        <p class="mb-3">Target: ${not empty product.target ? product.target.name : 'N/A'}</p>
+                        <h5 class="fw-bold mb-3">
+                            <fmt:formatNumber value="${product.price}" type="currency" currencySymbol="$"/>
+                        </h5>
+                        <p class="mb-4">${product.shortDesc}</p>
                         <div class="input-group quantity mb-5" style="width: 100px;">
                             <div class="input-group-btn">
                                 <button class="btn btn-sm btn-minus rounded-circle bg-light border">
@@ -104,115 +99,7 @@
                         <div class="tab-content mb-5">
                             <div class="tab-pane active" id="nav-about" role="tabpanel"
                                  aria-labelledby="nav-about-tab">
-                                <p>The generated Lorem Ipsum is therefore always free from repetition
-                                    injected humour, or non-characteristic words etc.
-                                    Susp endisse ultricies nisi vel quam suscipit </p>
-                                <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish
-                                    snailfish filefish Antarctic
-                                    icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish,
-                                    electric ray sweeper.</p>
-                                <div class="px-2">
-                                    <div class="row g-4">
-                                        <div class="col-6">
-                                            <div
-                                                    class="row bg-light align-items-center text-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Weight</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">1 kg</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="row text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Country of Origin</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">Agro Farm</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Quality</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">Organic</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="row text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Сheck</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">Healthy</p>
-                                                </div>
-                                            </div>
-                                            <div
-                                                    class="row bg-light text-center align-items-center justify-content-center py-2">
-                                                <div class="col-6">
-                                                    <p class="mb-0">Min Weight</p>
-                                                </div>
-                                                <div class="col-6">
-                                                    <p class="mb-0">250 Kg</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="nav-mission" role="tabpanel"
-                                 aria-labelledby="nav-mission-tab">
-                                <div class="d-flex">
-                                    <img src="resources/client/images/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                         style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Jason Smith</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p>The generated Lorem Ipsum is therefore always free from
-                                            repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                    </div>
-                                </div>
-                                <div class="d-flex">
-                                    <img src="resources/client/images/avatar.jpg" class="img-fluid rounded-circle p-3"
-                                         style="width: 100px; height: 100px;" alt="">
-                                    <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
-                                        <div class="d-flex justify-content-between">
-                                            <h5>Sam Peters</h5>
-                                            <div class="d-flex mb-3">
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star text-secondary"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                        </div>
-                                        <p class="text-dark">The generated Lorem Ipsum is therefore always
-                                            free from repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum
-                                    et tempor sit. Aliqu diam
-                                    amet diam et eos labore. 3</p>
-                                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et
-                                    eos labore.
-                                    Clita erat ipsum et lorem et sit</p>
+                                <p>${product.detailDesc}</p>
                             </div>
                         </div>
                     </div>
@@ -278,13 +165,13 @@
 <!-- JavaScript Libraries -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="resources/client/lib/easing/easing.min.js"></script>
-<script src="resources/client/lib/waypoints/waypoints.min.js"></script>
-<script src="resources/client/lib/lightbox/js/lightbox.min.js"></script>
-<script src="resources/client/lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="/resources/client/lib/easing/easing.min.js"></script>
+<script src="/resources/client/lib/waypoints/waypoints.min.js"></script>
+<script src="/resources/client/lib/lightbox/js/lightbox.min.js"></script>
+<script src="/resources/client/lib/owlcarousel/owl.carousel.min.js"></script>
 
 <!-- Template Javascript -->
-<script src="resources/client/js/main.js"></script>
+<script src="/resources/client/js/main.js"></script>
 </body>
 
 </html>
